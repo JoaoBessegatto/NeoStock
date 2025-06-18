@@ -1,0 +1,14 @@
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/NeoStockApplication.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/Login.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/LoginController.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/LoginService.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/Role.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/Usuario.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/UsuarioRepository.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/auth/UsuarioService.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/config/JwtAuthenticationFilter.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/config/JwtServiceGenerator.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/config/SecurityConfig.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/config/SecurityManager.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/request/UsuarioRequestDTO.java
+/Users/joaopedro/NeoStock/Back-end/src/main/java/br/com/NeoStock/exeptions/UserInvalidException.java

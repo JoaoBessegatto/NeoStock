@@ -1,0 +1,14 @@
+br/com/NeoStock/config/JwtServiceGenerator.class
+br/com/NeoStock/auth/Role.class
+br/com/NeoStock/auth/Login.class
+br/com/NeoStock/auth/Usuario.class
+br/com/NeoStock/config/JwtAuthenticationFilter.class
+br/com/NeoStock/auth/UsuarioService.class
+br/com/NeoStock/auth/UsuarioRepository.class
+br/com/NeoStock/auth/LoginController.class
+br/com/NeoStock/config/SecurityConfig.class
+br/com/NeoStock/auth/LoginService.class
+br/com/NeoStock/exeptions/UserInvalidException.class
+br/com/NeoStock/NeoStockApplication.class
+br/com/NeoStock/config/SecurityManager.class
+br/com/NeoStock/dto/request/UsuarioRequestDTO.class
