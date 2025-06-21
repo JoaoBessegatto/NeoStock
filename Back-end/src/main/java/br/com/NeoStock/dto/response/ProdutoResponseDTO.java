@@ -1,11 +1,7 @@
 package br.com.NeoStock.dto.response;
 
 import br.com.NeoStock.entity.Produto;
-import jdk.jfr.StackTrace;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class ProdutoResponseDTO {
     private Long id;
@@ -31,21 +28,19 @@ public class ProdutoResponseDTO {
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
 
-    public ProdutoResponseDTO toDTO (Produto produto){
-        return ProdutoResponseDTO.builder()
-                .id(produto.getId())
-                .name(produto.getName())
-                .descricao(produto.getDescricao())
-                .bigDescricao(produto.getBigDescricao())
-                .preco(produto.getPreco())
-                .quantidadeEstoque(produto.getQuantidadeEstoque())
-                .quantidadeMinima(produto.getQuantidadeMinima())
-                .ativo(produto.getAtivo())
-                .imagemUrl(produto.getImagemUrl())
-                .categoriaId(produto.getCategoria().getId())
-                .nomeCategoria(produto.getCategoria().getNome())
-                .criadoEm(produto.getCriadoEm())
-                .atualizadoEm(produto.getAtualizadoEm())
-                .build();
+    public ProdutoResponseDTO(Produto produto) {
+        this.id = produto.getId();
+        this.name = produto.getNome();
+        this.descricao = produto.getDescricao();
+        this.bigDescricao = produto.getBigDescricao();
+        this.preco = produto.getPreco();
+        this.quantidadeEstoque = produto.getQuantidadeEstoque();
+        this.quantidadeMinima = produto.getQuantidadeMinima();
+        this.ativo = produto.getAtivo();
+        this.imagemUrl = produto.getImagemUrl();
+        this.nomeCategoria = produto.getCategoria().getNome();
+        this.categoriaId = produto.getCategoria().getId();
+        this.criadoEm = produto.getCriadoEm();
+        this.atualizadoEm = produto.getAtualizadoEm();
     }
 }
