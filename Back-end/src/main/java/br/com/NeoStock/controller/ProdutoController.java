@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("produtos")
@@ -25,6 +22,15 @@ public class ProdutoController {
     public ResponseEntity<ProdutoResponseDTO> cadastrar(@Valid @RequestBody ProdutoRequestDTO dto) {
         ProdutoResponseDTO produtoResponse = produtoService.cadastrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoResponse);
+    }
+    @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ProdutoResponseDTO> atualizar(@Valid @RequestBody ProdutoRequestDTO dto){
+        if(dto.getId() == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        ProdutoResponseDTO updateProduto = produtoService.atualizar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updateProduto);
     }
 
 }

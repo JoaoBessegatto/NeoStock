@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class ProdutoRequestDTO {
+    private Long id;
 
     @NotBlank(message = "O nome não pode ser vazio")
     private String name;
