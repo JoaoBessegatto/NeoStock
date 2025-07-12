@@ -2,16 +2,19 @@ package br.com.NeoStock.controller;
 
 import br.com.NeoStock.dto.request.CategoriaRequestDTO;
 import br.com.NeoStock.dto.response.CategoriaResponseDTO;
+import br.com.NeoStock.entity.Categoria;
 import br.com.NeoStock.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("categorias")
@@ -25,5 +28,40 @@ public class CategoriaController {
         CategoriaResponseDTO categoriaResponse = categoriaService.cadastrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaResponse);
     }
+    @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<CategoriaResponseDTO>atualizar(@Valid @RequestBody CategoriaRequestDTO dto){
+        if(dto.getId() == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        CategoriaResponseDTO updateCategory = categoriaService.atualizar(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(updateCategory);
+    }
+    @GetMapping
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<List<CategoriaResponseDTO>> findAll(){
+        List<Categoria> categorias = categoriaService.findAll();
 
+        if(categorias.isEmpty()){
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        List<CategoriaResponseDTO> dtos = categorias.stream()
+                .map(CategoriaResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(dtos);
+    }
+    @GetMapping("{id}")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<CategoriaResponseDTO>findById(@PathVariable Long id){
+        return categoriaService.findById(id)
+                .map(categoria -> ResponseEntity.ok(new CategoriaResponseDTO(categoria)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        boolean deletado = categoriaService.delete(id);
+        return deletado ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
+    }
 }

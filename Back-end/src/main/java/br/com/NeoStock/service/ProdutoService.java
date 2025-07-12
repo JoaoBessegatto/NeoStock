@@ -18,6 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -64,5 +68,21 @@ public class ProdutoService {
 
         Produto produtoAtualizado = produtoRepository.save(produtoExistente);
         return new ProdutoResponseDTO(produtoAtualizado);
+    }
+    @Transactional(readOnly = true)
+    public List<Produto> findAll(){
+        return produtoRepository.findAll();
+    }
+    @Transactional(readOnly = true)
+    public Optional<Produto> findById(Long id){
+        return produtoRepository.findById(id);
+    }
+
+    public boolean delete (Long id){
+        if(!produtoRepository.existsById(id)){
+            return false;
+        }
+        produtoRepository.deleteById(id);
+        return true;
     }
 }

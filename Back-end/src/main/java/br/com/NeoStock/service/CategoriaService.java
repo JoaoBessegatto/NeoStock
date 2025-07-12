@@ -5,10 +5,15 @@ import br.com.NeoStock.dto.request.CategoriaRequestDTO;
 import br.com.NeoStock.dto.response.CategoriaResponseDTO;
 import br.com.NeoStock.entity.Categoria;
 import br.com.NeoStock.exeptions.AuthorizationException;
+import br.com.NeoStock.exeptions.CategoryException;
 import br.com.NeoStock.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,4 +31,28 @@ public class CategoriaService {
         Categoria categoriaCadastrada = categoriaRepository.save(categoria);
         return new CategoriaResponseDTO(categoriaCadastrada);
     }
+    public CategoriaResponseDTO atualizar (CategoriaRequestDTO dto){
+        Categoria categoriaExistente = categoriaRepository.findById(dto.getId())
+                .orElseThrow(() -> new CategoryException("Não foi possivel encontrar a categoria"));
+        categoriaExistente.setId(dto.getId());
+        categoriaExistente.setNome(dto.getNome());
+        Categoria categoriaAtualizada = categoriaRepository.save(categoriaExistente);
+        return new CategoriaResponseDTO(categoriaAtualizada);
+    }
+    @Transactional(readOnly = true)
+    public List<Categoria> findAll(){
+        return categoriaRepository.findAll();
+    }
+    @Transactional(readOnly = true)
+    public Optional<Categoria> findById(Long id){
+        return categoriaRepository.findById(id);
+    }
+    public boolean delete (Long id){
+        if(!categoriaRepository.existsById(id)){
+            return false;
+        }
+        categoriaRepository.deleteById(id);
+        return true;
+    }
+
 }
