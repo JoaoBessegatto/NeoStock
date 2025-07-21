@@ -1,11 +1,14 @@
 package br.com.NeoStock.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -42,9 +45,14 @@ public class Produto implements Serializable {
     @Column(name = "urlImg", nullable = false)
     private String imagemUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    @ManyToMany
+    @JoinTable(
+            name = "produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    @JsonManagedReference
+    private Set<Categoria> categorias = new HashSet<>();
 
     @Column(name = "dataCriacao")
     private LocalDateTime criadoEm;

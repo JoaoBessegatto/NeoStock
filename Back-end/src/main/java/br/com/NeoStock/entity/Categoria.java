@@ -1,11 +1,14 @@
 package br.com.NeoStock.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +25,7 @@ public class Categoria implements Serializable {
     @Column(name = "nome",length = 45,nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "categoria")
-    private List<Produto> produtos;
+    @ManyToMany(mappedBy = "categorias")
+    @JsonBackReference
+    private Set<Produto> produtos = new HashSet<>();
 }

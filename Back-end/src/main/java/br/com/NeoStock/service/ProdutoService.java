@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +36,10 @@ public class ProdutoService {
         if(!usuarioLogado.getRole().name().equals("ADMIN")){
             throw new AuthorizationException("Somente ADMIN podem cadastrar novos produtos");
         }
-        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new CategoryException("Categoria não encontrada"));
+        Set<Categoria> categorias = dto.getCategoriaIds().stream()
+                .map(id -> categoriaRepository.findById(id)
+                        .orElseThrow(() -> new CategoryException("Categoria não encontrada com id: " + id)))
+                .collect(Collectors.toSet());
         Produto produto = Produto.builder()
                 .nome(dto.getName())
                 .descricao(dto.getDescricao())
@@ -44,7 +48,7 @@ public class ProdutoService {
                 .quantidadeEstoque(dto.getQuantidadeEstoque())
                 .quantidadeMinima(dto.getQuantidadeMinima())
                 .imagemUrl(dto.getImagemUrl())
-                .categoria(categoria)
+                .categorias(categorias)
                 .build();
 
             Produto produtoCadastrado = produtoRepository.save(produto);
@@ -53,11 +57,11 @@ public class ProdutoService {
     public ProdutoResponseDTO atualizar(ProdutoRequestDTO dto){
         Produto produtoExistente = produtoRepository.findById(dto.getId())
                 .orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
-        if (!produtoExistente.getCategoria().getId().equals(dto.getCategoriaId())) {
-            Categoria novaCategoria = categoriaRepository.findById(dto.getCategoriaId())
-                    .orElseThrow(() -> new CategoryException("Categoria não encontrada"));
-            produtoExistente.setCategoria(novaCategoria);
-        }
+        Set<Categoria> categorias = dto.getCategoriaIds().stream()
+                .map(id -> categoriaRepository.findById(id)
+                        .orElseThrow(() -> new CategoryException("Categoria não encontrada com id: " + id)))
+                .collect(Collectors.toSet());
+
         produtoExistente.setNome(dto.getName());
         produtoExistente.setDescricao(dto.getDescricao());
         produtoExistente.setBigDescricao(dto.getBigDescricao());

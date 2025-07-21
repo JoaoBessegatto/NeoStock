@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -39,5 +40,5 @@ public class ProdutoRequestDTO {
     private String imagemUrl;
 
     @NotNull(message = "O id da categoria não pode ser nulo")
-    private Long categoriaId;
+    private Set<Long> categoriaIds;
 }

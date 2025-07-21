@@ -1,7 +1,7 @@
 br/com/NeoStock/service/CategoriaService.class
 br/com/NeoStock/controller/ProdutoController.class
-br/com/NeoStock/exeptions/AuthorizationException.class
 br/com/NeoStock/service/ProdutoService.class
+br/com/NeoStock/exeptions/AuthorizationException.class
 br/com/NeoStock/auth/Role.class
 br/com/NeoStock/dto/request/CategoriaRequestDTO.class
 br/com/NeoStock/auth/Login.class
@@ -25,6 +25,7 @@ br/com/NeoStock/entity/Categoria.class
 br/com/NeoStock/entity/Categoria$CategoriaBuilder.class
 br/com/NeoStock/exeptions/ProdutoNotFoundException.class
 br/com/NeoStock/controller/CategoriaController.class
+br/com/NeoStock/dto/response/CategoriaRecord.class
 br/com/NeoStock/auth/UsuarioRepository.class
 br/com/NeoStock/exeptions/BaseException.class
 br/com/NeoStock/auth/LoginController.class
@@ -36,3 +37,4 @@ br/com/NeoStock/dto/response/CategoriaResponseDTO.class
 br/com/NeoStock/exeptions/CategoryException.class
 br/com/NeoStock/dto/request/UsuarioRequestDTO.class
 br/com/NeoStock/entity/Produto.class
+br/com/NeoStock/dto/response/CategoriaRecord$CategoriaRecordBuilder.class
