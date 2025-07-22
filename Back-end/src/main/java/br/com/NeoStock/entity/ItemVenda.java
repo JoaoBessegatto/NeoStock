@@ -30,6 +30,10 @@ public class ItemVenda implements Serializable {
     @JoinColumn(name = "venda_id")
     private Venda venda;
 
+    public BigDecimal getSubtotal(){
+        return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

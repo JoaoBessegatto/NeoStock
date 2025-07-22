@@ -25,9 +25,14 @@ public class Venda implements Serializable {
 
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemVenda> itens;
 
+    public BigDecimal getValorTotal(){
+        return itens.stream()
+                .map(ItemVenda::getSubtotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
