@@ -14,12 +14,14 @@ import br.com.NeoStock.repository.VendaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -62,5 +64,21 @@ public class VendaService {
         novaVenda.setFormaPagamento(vendaRequestDTO.getFormaPagamento());
         Venda safeVenda = vendaRepository.save(novaVenda);
         return new VendaResponseDTO(safeVenda);
+    }
+
+    public boolean delete(Long id){
+        if(!vendaRepository.existsById(id)){
+            return false;
+        }
+        vendaRepository.deleteById(id);
+        return true;
+    }
+    @Transactional(readOnly = true)
+    public Optional<Venda> findById(Long id){
+        return  vendaRepository.findById(id);
+    }
+    @Transactional(readOnly = true)
+    public List<Venda> findAll(){
+        return vendaRepository.findAll();
     }
 }

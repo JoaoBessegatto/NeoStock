@@ -25,8 +25,6 @@ public class ProdutoResponseDTO {
     private Boolean ativo;
     private String imagemUrl;
     private Set<CategoriaRecord> categorias;
-    private Set<Long> categoriaIds;
-    private Set<String> nomesCategorias;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
 
@@ -47,12 +45,5 @@ public class ProdutoResponseDTO {
         this.criadoEm = produto.getCriadoEm();
         this.atualizadoEm = produto.getAtualizadoEm();
 
-        this.categoriaIds = produto.getCategorias().stream()
-                .map(Categoria::getId)
-                .collect(Collectors.toSet());
-
-        this.nomesCategorias = produto.getCategorias().stream()
-                .map(Categoria::getNome)
-                .collect(Collectors.toSet());
     }
 }

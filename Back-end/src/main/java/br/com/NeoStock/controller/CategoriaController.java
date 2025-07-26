@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("categorias")
 @RequiredArgsConstructor
 public class CategoriaController {
-    CategoriaService categoriaService;
+    private final CategoriaService categoriaService;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")

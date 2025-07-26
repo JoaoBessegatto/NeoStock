@@ -26,8 +26,8 @@ br/com/NeoStock/exeptions/CategoryException.class
 br/com/NeoStock/entity/Produto.class
 br/com/NeoStock/dto/response/CategoriaRecord$CategoriaRecordBuilder.class
 br/com/NeoStock/service/CategoriaService.class
-br/com/NeoStock/exeptions/AuthorizationException.class
 br/com/NeoStock/service/ProdutoService.class
+br/com/NeoStock/exeptions/AuthorizationException.class
 br/com/NeoStock/auth/Role.class
 br/com/NeoStock/controller/VendaController.class
 br/com/NeoStock/auth/Usuario.class

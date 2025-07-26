@@ -23,6 +23,7 @@ public class VendaResponseDTO {
         this.id = venda.getId();
         this.data = venda.getData();
         this.valorTotal = venda.getValorTotal();
+        this.formaPagamento = venda.getFormaPagamento();
         this.itens = venda.getItens().stream()
                 .map(ItemVendaResponseDTO::new)
                 .collect(Collectors.toList());

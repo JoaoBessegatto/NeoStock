@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CategoriaService {
-    CategoriaRepository categoriaRepository;
+    private final CategoriaRepository categoriaRepository;
 
     public CategoriaResponseDTO cadastrar (CategoriaRequestDTO dto){
         Usuario usuarioLogado = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -2,15 +2,19 @@ package br.com.NeoStock.controller;
 
 import br.com.NeoStock.dto.request.VendaRequestDTO;
 import br.com.NeoStock.dto.response.VendaResponseDTO;
+import br.com.NeoStock.entity.Venda;
 import br.com.NeoStock.service.VendaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import javax.swing.event.ListDataEvent;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("venda")
@@ -22,5 +26,30 @@ public class VendaController {
     public ResponseEntity<VendaResponseDTO>gerarVenda(@Valid @RequestBody VendaRequestDTO dto){
         VendaResponseDTO vendaResponse = vendaService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(vendaResponse);
+    }
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        boolean deletado = vendaService.delete(id);
+        return deletado ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<VendaResponseDTO>getById(@PathVariable Long id){
+        return vendaService.findById(id)
+                .map(venda -> ResponseEntity.ok(new VendaResponseDTO(venda)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    @GetMapping
+    public ResponseEntity<List<VendaResponseDTO>>getAll(){
+        List<Venda> vendas = vendaService.findAll();
+
+        if(vendas.isEmpty()){
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        List<VendaResponseDTO> vendasDtos = vendas.stream()
+                .map(VendaResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(vendasDtos);
     }
 }

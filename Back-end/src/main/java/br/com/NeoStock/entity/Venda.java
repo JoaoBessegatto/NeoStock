@@ -22,7 +22,7 @@ public class Venda implements Serializable {
     private LocalDateTime data;
 
     private BigDecimal valorTotal;
-
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
