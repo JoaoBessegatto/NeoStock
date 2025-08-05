@@ -1,5 +1,6 @@
 package br.com.NeoStock.entity;
 
+import br.com.NeoStock.auth.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class Venda implements Serializable {
 
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemVenda> itens;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public BigDecimal getValorTotal(){
         return itens.stream()

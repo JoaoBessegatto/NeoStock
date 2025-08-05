@@ -1,5 +1,6 @@
 package br.com.NeoStock.dto.response;
 
+import br.com.NeoStock.auth.Role;
 import br.com.NeoStock.entity.FormaPagamento;
 import br.com.NeoStock.entity.Venda;
 import lombok.Getter;
@@ -18,6 +19,8 @@ public class VendaResponseDTO {
     private BigDecimal valorTotal;
     private FormaPagamento formaPagamento;
     private List<ItemVendaResponseDTO> itens;
+    private String nomeUsuario;
+    private Role roleUsuario;
 
     public VendaResponseDTO(Venda venda){
         this.id = venda.getId();
@@ -27,5 +30,7 @@ public class VendaResponseDTO {
         this.itens = venda.getItens().stream()
                 .map(ItemVendaResponseDTO::new)
                 .collect(Collectors.toList());
+        this.nomeUsuario = venda.getUsuario().getUsername();
+        this.roleUsuario = venda.getUsuario().getRole();
     }
 }
