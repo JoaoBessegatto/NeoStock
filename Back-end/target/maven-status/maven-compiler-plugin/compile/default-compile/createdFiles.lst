@@ -1,5 +1,6 @@
 br/com/NeoStock/controller/ProdutoController.class
 br/com/NeoStock/dto/request/CategoriaRequestDTO.class
+br/com/NeoStock/controller/RelatorioController.class
 br/com/NeoStock/auth/Login.class
 br/com/NeoStock/config/JwtAuthenticationFilter.class
 br/com/NeoStock/exeptions/GlobalExceptionHandler.class
@@ -23,6 +24,7 @@ br/com/NeoStock/repository/CategoriaRepository.class
 br/com/NeoStock/NeoStockApplication.class
 br/com/NeoStock/config/SecurityManager.class
 br/com/NeoStock/exeptions/CategoryException.class
+br/com/NeoStock/service/RelatorioService.class
 br/com/NeoStock/entity/Produto.class
 br/com/NeoStock/dto/response/CategoriaRecord$CategoriaRecordBuilder.class
 br/com/NeoStock/service/CategoriaService.class
@@ -32,9 +34,11 @@ br/com/NeoStock/auth/Role.class
 br/com/NeoStock/controller/VendaController.class
 br/com/NeoStock/auth/Usuario.class
 br/com/NeoStock/dto/request/ItemVendaRequestDTO.class
+br/com/NeoStock/dto/response/ProdutoMaisVendidoResponseDTO.class
 br/com/NeoStock/exeptions/EstoqueInsuficienteException.class
-br/com/NeoStock/config/SecurityConfig.class
 br/com/NeoStock/auth/LoginService.class
+br/com/NeoStock/config/SecurityConfig.class
+br/com/NeoStock/repository/ItemVendaRepository.class
 br/com/NeoStock/exeptions/UserInvalidException.class
 br/com/NeoStock/dto/request/VendaRequestDTO.class
 br/com/NeoStock/service/VendaService.class

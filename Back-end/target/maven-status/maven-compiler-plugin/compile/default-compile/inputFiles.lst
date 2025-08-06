@@ -12,6 +12,7 @@
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/config/SecurityManager.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/controller/CategoriaController.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/controller/ProdutoController.java
+/home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/controller/RelatorioController.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/controller/VendaController.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/request/CategoriaRequestDTO.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/request/ItemVendaRequestDTO.java
@@ -21,6 +22,7 @@
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/CategoriaRecord.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/CategoriaResponseDTO.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/ItemVendaResponseDTO.java
+/home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/ProdutoMaisVendidoResponseDTO.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/ProdutoResponseDTO.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/dto/response/VendaResponseDTO.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/entity/Categoria.java
@@ -38,8 +40,10 @@
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/exeptions/ProdutoNotFoundException.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/exeptions/UserInvalidException.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/repository/CategoriaRepository.java
+/home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/repository/ItemVendaRepository.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/repository/ProdutoRepository.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/repository/VendaRepository.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/service/CategoriaService.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/service/ProdutoService.java
+/home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/service/RelatorioService.java
 /home/joao-pedro/Workspace/NeoStock/Back-end/src/main/java/br/com/NeoStock/service/VendaService.java
