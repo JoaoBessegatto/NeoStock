@@ -63,7 +63,8 @@ public class VendaService {
         }
         novaVenda.setItens(itens);
         novaVenda.setValorTotal(total);
-        novaVenda.setData(vendaRequestDTO.getData());
+        //vendaRequestDTO.getData() Colocar esse parametro no setData quando o FrontEnd estiver pronto
+        novaVenda.setData(LocalDateTime.now());
         novaVenda.setFormaPagamento(vendaRequestDTO.getFormaPagamento());
         Usuario usuarioLogado = (Usuario) SecurityContextHolder.getContext()
                         .getAuthentication().getPrincipal();

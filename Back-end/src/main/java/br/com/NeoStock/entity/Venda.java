@@ -26,7 +26,7 @@ public class Venda implements Serializable {
     @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ItemVenda> itens;
 
     @ManyToOne
