@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class ProdutoController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> cadastrar(@Valid @RequestBody ProdutoRequestDTO dto) {
         ProdutoResponseDTO produtoResponse = produtoService.cadastrar(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoResponse);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(produtoResponse.getId()).toUri();
+        return ResponseEntity.created(uri).body(produtoResponse);
     }
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")

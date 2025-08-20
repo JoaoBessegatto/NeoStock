@@ -11,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.swing.event.ListDataEvent;
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +27,8 @@ public class VendaController {
     @PostMapping
     public ResponseEntity<VendaResponseDTO>gerarVenda(@Valid @RequestBody VendaRequestDTO dto){
         VendaResponseDTO vendaResponse = vendaService.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(vendaResponse);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(vendaResponse.getId()).toUri();
+        return ResponseEntity.created(uri).body(vendaResponse);
     }
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ADMIN')")

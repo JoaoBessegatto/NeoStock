@@ -31,10 +31,10 @@ public class CategoriaService {
         Categoria categoriaCadastrada = categoriaRepository.save(categoria);
         return new CategoriaResponseDTO(categoriaCadastrada);
     }
-    public CategoriaResponseDTO atualizar (CategoriaRequestDTO dto){
-        Categoria categoriaExistente = categoriaRepository.findById(dto.getId())
+    public CategoriaResponseDTO atualizar (CategoriaRequestDTO dto, Long id){
+        Categoria categoriaExistente = categoriaRepository.findById(id)
                 .orElseThrow(() -> new CategoryException("Não foi possivel encontrar a categoria"));
-        categoriaExistente.setId(dto.getId());
+        categoriaExistente.setId(id);
         categoriaExistente.setNome(dto.getNome());
         Categoria categoriaAtualizada = categoriaRepository.save(categoriaExistente);
         return new CategoriaResponseDTO(categoriaAtualizada);

@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,15 +28,16 @@ public class CategoriaController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoriaResponseDTO>cadastrar(@Valid @RequestBody CategoriaRequestDTO dto){
         CategoriaResponseDTO categoriaResponse = categoriaService.cadastrar(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaResponse);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(categoriaResponse.getId()).toUri();
+        return ResponseEntity.created(uri).body(categoriaResponse);
     }
-    @PutMapping
+    @PutMapping("{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<CategoriaResponseDTO>atualizar(@Valid @RequestBody CategoriaRequestDTO dto){
-        if(dto.getId() == null){
+    public ResponseEntity<CategoriaResponseDTO>atualizar(@Valid @RequestBody CategoriaRequestDTO dto, @PathVariable Long id){
+        if(id == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        CategoriaResponseDTO updateCategory = categoriaService.atualizar(dto);
+        CategoriaResponseDTO updateCategory = categoriaService.atualizar(dto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updateCategory);
     }
     @GetMapping

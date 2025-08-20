@@ -21,7 +21,7 @@ public class LoginController {
 	private UsuarioService usuarioService;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> logar(@RequestBody Login login) { // Alterado para ResponseEntity<?>
+	public ResponseEntity<?> logar(@RequestBody Login login) {
 		try {
 			String token = loginService.logar(login);
 			return new ResponseEntity<>(token, HttpStatus.OK);
@@ -41,6 +41,7 @@ public class LoginController {
 	public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioRequestDTO dto) {
 		dto.setRole(Role.USER);
 		usuarioService.cadastrar(dto);
+
 		return ResponseEntity.ok().build();
 	}
 

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.com.NeoStock.NeoStockApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.958 s -- in br.com.NeoStock.NeoStockApplicationTests
