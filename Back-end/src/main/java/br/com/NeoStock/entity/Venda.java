@@ -26,27 +26,29 @@ public class Venda implements Serializable {
     @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemVenda> itens;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @Transient
     public BigDecimal getValorTotal(){
         return itens.stream()
                 .map(ItemVenda::getSubtotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Venda venda = (Venda) o;
-        return Objects.equals(id, venda.id) && Objects.equals(data, venda.data) && Objects.equals(valorTotal, venda.valorTotal) && formaPagamento == venda.formaPagamento && Objects.equals(itens, venda.itens);
+        if (this == o) return true;
+        if (!(o instanceof Venda venda)) return false;
+        return Objects.equals(id, venda.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, data, valorTotal, formaPagamento, itens);
+        return Objects.hash(id);
     }
 }

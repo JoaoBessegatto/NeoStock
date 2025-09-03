@@ -30,6 +30,7 @@ public class ItemVenda implements Serializable {
     @JoinColumn(name = "venda_id")
     private Venda venda;
 
+    @Transient
     public BigDecimal getSubtotal(){
         return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
     }
